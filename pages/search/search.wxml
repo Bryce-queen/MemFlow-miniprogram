@@ -1,0 +1,87 @@
+<!-- ═══════════════════════════════════════════
+   记忆外挂 · 搜索页 · Midnight Luxe
+   ═══════════════════════════════════════════ -->
+<view class="page">
+  <!-- 页头 -->
+  <view class="page-header">
+    <text class="page-title">搜索</text>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-wrapper">
+    <view class="search-bar-enhanced {{inputFocus?'focused':''}}">
+      <text class="search-icon">🔍</text>
+      <input
+        value="{{keyword}}"
+        placeholder="搜索你的记忆…"
+        placeholder-style="color:#4A4A60"
+        bindinput="onInput"
+        bindconfirm="onConfirm"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+        confirm-type="search"
+      />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="onClear">✕</text>
+    </view>
+  </view>
+
+  <!-- 搜索模式 -->
+  <view class="mode-tabs">
+    <text class="mode-chip {{mode==='keyword'?'active':''}}" data-mode="keyword" bindtap="onModeChange">关键词</text>
+    <text class="mode-chip {{mode==='semantic'?'active':''}}" data-mode="semantic" bindtap="onModeChange">语义</text>
+    <text class="mode-chip {{mode==='hybrid'?'active':''}}" data-mode="hybrid" bindtap="onModeChange">混合</text>
+  </view>
+
+  <!-- 搜索历史（未搜索时） -->
+  <view class="history-section" wx:if="{{!searched&&history.length}}">
+    <view class="history-header">
+      <text class="history-label">搜索历史</text>
+      <text class="history-clear" bindtap="onClearHistory">清除</text>
+    </view>
+    <view class="history-tags">
+      <text
+        wx:for="{{history}}"
+        wx:key="*this"
+        class="history-chip"
+        data-q="{{item}}"
+        bindtap="onHistoryTap"
+      >{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view wx:if="{{searched}}">
+    <view class="results-header" wx:if="{{!searching}}">
+      <text class="results-count">找到 <text class="results-keyword">{{results.length}}</text> 条结果</text>
+    </view>
+
+    <block wx:if="{{results.length}}">
+      <view wx:for="{{results}}" wx:key="memory.id" class="fade-in-up">
+        <memory-card
+          memory="{{item.memory}}"
+          show-actions="{{false}}"
+          bind:tap="onMemoryTap"
+        />
+        <view class="match-row">
+          <text class="match-reason">{{item.match_reason}}</text>
+          <text class="match-score {{item.score>0.5?'high':''}}">{{item.displayScore}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view class="empty-state" wx:elif="{{!searching}}">
+      <text class="emoji">🔍</text>
+      <text class="title">没有找到</text>
+      <text class="desc">试试换个关键词或语义搜索模式</text>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{searching}}">
+    <view class="loading-dots">
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+    </view>
+    <text class="text-secondary">搜索中…</text>
+  </view>
+</view>

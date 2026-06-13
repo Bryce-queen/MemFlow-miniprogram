@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/capture/capture",
+    "pages/discover/discover",
+    "pages/search/search",
+    "pages/detail/detail",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "navigationBarTitleText": "记忆外挂",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0f0f1a",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#585870",
+    "selectedColor": "#D4A853",
+    "backgroundColor": "#1a1a2e",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/capture/capture",
+        "text": "捕获",
+        "iconPath": "images/capture.png",
+        "selectedIconPath": "images/capture-active.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "images/discover.png",
+        "selectedIconPath": "images/discover-active.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "images/search.png",
+        "selectedIconPath": "images/search-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

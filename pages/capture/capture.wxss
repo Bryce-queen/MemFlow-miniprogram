@@ -1,0 +1,191 @@
+/* ═══════════════════════════════
+   捕获页 · Midnight Luxe
+   ═══════════════════════════════ */
+.page {
+  min-height: 100vh;
+  padding-bottom: 140rpx;
+}
+
+/* ── 问候栏 ── */
+.greeting {
+  padding: 44rpx 32rpx 20rpx;
+  padding-top: calc(44rpx + env(safe-area-inset-top));
+}
+
+.greeting-emoji {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.greeting-text {
+  font-size: 38rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  color: #EAEAF2;
+}
+
+.greeting-sub {
+  font-size: 26rpx;
+  color: #9090A8;
+  margin-top: 8rpx;
+  line-height: 1.6;
+}
+
+/* ── 输入区域 ── */
+.input-area {
+  margin: 12rpx 28rpx 0;
+}
+
+.input-box {
+  background: #111122;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  color: #EAEAF2;
+  font-size: 30rpx;
+  min-height: 180rpx;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1rpx solid #222240;
+  line-height: 1.8;
+  transition: all 0.25s ease;
+}
+
+.input-box:focus {
+  border-color: rgba(212,168,83,0.35);
+  box-shadow: 0 0 0 6rpx rgba(212,168,83,0.05);
+}
+
+.input-toolbar {
+  padding: 16rpx 4rpx 0;
+}
+
+.source-pill {
+  padding: 10rpx 24rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #585870;
+  margin-right: 14rpx;
+  background: rgba(255,255,255,0.02);
+  border: 1rpx solid transparent;
+  transition: all 0.15s ease;
+}
+
+.source-pill.active {
+  color: #D4A853;
+  background: rgba(212,168,83,0.08);
+  border-color: rgba(212,168,83,0.2);
+}
+
+.submit-btn {
+  padding: 14rpx 36rpx !important;
+  font-size: 26rpx !important;
+  border-radius: 24rpx !important;
+  font-weight: 700 !important;
+}
+
+.char-count {
+  font-size: 22rpx;
+  color: #585870;
+  margin-right: 16rpx;
+}
+
+/* ── 语音录制 ── */
+.record-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0 40rpx;
+}
+
+.record-btn {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #181830, #111122);
+  border: 2rpx solid #222240;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+}
+
+.record-btn.recording {
+  background: linear-gradient(145deg, #D4A853, #F87171);
+  border-color: transparent;
+  box-shadow: 0 0 48rpx rgba(212,168,83,0.3);
+}
+
+.record-btn:active {
+  transform: scale(0.95);
+}
+
+.record-icon {
+  font-size: 60rpx;
+}
+
+.record-wave {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  margin-top: 28rpx;
+}
+
+.record-wave-bar {
+  width: 6rpx;
+  border-radius: 3rpx;
+  background: #D4A853;
+  animation: waveAnimation 0.8s ease-in-out infinite;
+}
+
+.record-wave-bar:nth-child(1) { height: 16rpx; animation-delay: 0s; }
+.record-wave-bar:nth-child(2) { height: 28rpx; animation-delay: 0.1s; }
+.record-wave-bar:nth-child(3) { height: 20rpx; animation-delay: 0.2s; }
+.record-wave-bar:nth-child(4) { height: 32rpx; animation-delay: 0.3s; }
+.record-wave-bar:nth-child(5) { height: 18rpx; animation-delay: 0.4s; }
+
+@keyframes waveAnimation {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.4); opacity: 0.4; }
+}
+
+.record-hint {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: #585870;
+}
+
+.record-timer {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #D4A853;
+  margin-top: 16rpx;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 记忆列表区 ── */
+.list-section {
+  margin-top: 8rpx;
+}
+
+.list-header {
+  padding: 24rpx 32rpx 12rpx;
+}
+
+.list-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #9090A8;
+  letter-spacing: 1rpx;
+}
+
+.list-count {
+  font-size: 22rpx;
+  color: #585870;
+}
+
+/* ── 新建记忆飞入动画 ── */
+.memory-card-new {
+  animation: fadeInUp 0.4s ease-out;
+}

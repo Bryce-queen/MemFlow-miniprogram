@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "memory-card": "../../components/memory-card/memory-card"
+  },
+  "navigationBarTitleText": "记忆详情"
+}

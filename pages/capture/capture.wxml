@@ -1,0 +1,91 @@
+<!-- ═══════════════════════════════════════════
+   记忆外挂 · 捕获页 · Midnight Luxe
+   ═══════════════════════════════════════════ -->
+<view class="page">
+  <!-- 问候栏 -->
+  <view class="greeting">
+    <view class="greeting-emoji">🧠</view>
+    <view class="greeting-text">今天在想什么？</view>
+    <view class="greeting-sub">{{memories.length ? '已记录 ' + memories.length + ' 条记忆' : '捕捉每一个闪念'}}</view>
+  </view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <textarea
+      class="input-box"
+      value="{{inputText}}"
+      placeholder="写下你此刻的想法、灵感或感悟…"
+      placeholder-style="color:#4A4A60"
+      maxlength="5000"
+      auto-height
+      bindinput="onInput"
+      focus="{{inputFocus}}"
+      disabled="{{submitting}}"
+    />
+    <view class="input-toolbar flex-between">
+      <view class="flex-row">
+        <text class="source-pill {{source==='text'?'active':''}}" data-source="text" bindtap="onSourceChange">✍️ 文字</text>
+        <text class="source-pill {{source==='voice'?'active':''}}" data-source="voice" bindtap="onSourceChange">🎤 语音</text>
+      </view>
+      <view class="flex-row">
+        <text class="char-count">{{inputText.length}}/5000</text>
+        <button class="btn-primary submit-btn" bindtap="onSubmit" disabled="{{submitting||!inputText.trim()}}">
+          {{submitting ? '✺ 记录中' : '✦ 记录'}}
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 语音录制 -->
+  <view class="record-area" wx:if="{{!inputText.trim()}}">
+    <view class="record-btn {{recording?'recording':''}}"
+          bindtouchstart="onRecordStart"
+          bindtouchend="onRecordEnd">
+      <text class="record-icon">{{recording ? '⏺' : '🎤'}}</text>
+    </view>
+    <view wx:if="{{recording}}" class="flex-col flex-center">
+      <view class="record-wave">
+        <view class="record-wave-bar"></view>
+        <view class="record-wave-bar"></view>
+        <view class="record-wave-bar"></view>
+        <view class="record-wave-bar"></view>
+        <view class="record-wave-bar"></view>
+      </view>
+      <text class="record-timer">{{recordSeconds}}s</text>
+    </view>
+    <text class="record-hint" wx:else>按住说话，松开发送</text>
+  </view>
+
+  <!-- 记忆列表 -->
+  <view class="list-section">
+    <view class="list-header flex-between">
+      <text class="list-title">最近记忆</text>
+      <text class="list-count" wx:if="{{memories.length}}">{{memories.length}} 条</text>
+    </view>
+
+    <block wx:if="{{memories.length}}">
+      <memory-card
+        wx:for="{{memories}}"
+        wx:key="id"
+        memory="{{item}}"
+        bind:tap="onMemoryTap"
+      />
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:elif="{{!loading}}">
+      <text class="emoji">💭</text>
+      <text class="title">开始你的第一条记忆</text>
+      <text class="desc">每一次灵感都值得被珍藏</text>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">
+      <view class="loading-dots">
+        <view class="loading-dot"></view>
+        <view class="loading-dot"></view>
+        <view class="loading-dot"></view>
+      </view>
+      <text class="text-secondary">加载记忆…</text>
+    </view>
+  </view>
+</view>

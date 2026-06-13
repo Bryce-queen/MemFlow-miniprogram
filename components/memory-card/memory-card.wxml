@@ -1,0 +1,56 @@
+<!-- ═══════════════════════════════════════════
+   memory-card 组件 · Midnight Luxe
+   ═══════════════════════════════════════════ -->
+<view class="memory-card card" bindtap="onTap" bindlongpress="onLongPress">
+  <!-- 摘要行 -->
+  <view class="card-summary">{{formatted.summary}}</view>
+
+  <!-- 标签 -->
+  <view class="flex-wrap mt-16" wx:if="{{formatted.tags.length}}">
+    <text
+      wx:for="{{formatted.tags}}"
+      wx:key="name"
+      class="card-tag"
+      style="background:{{item.color.bg}}; color:{{item.color.text}}; border:1px solid {{item.color.border}};"
+      data-tag="{{item.name}}"
+      catchtap="onTagTap"
+    >{{item.name}}</text>
+  </view>
+
+  <!-- 实体 -->
+  <view class="flex-wrap mt-8" wx:if="{{formatted.entities.length}}">
+    <text wx:for="{{formatted.entities}}" wx:key="name" class="card-entity">
+      {{item.icon}} {{item.name}}
+    </text>
+  </view>
+
+  <!-- 底部信息 -->
+  <view class="card-footer">
+    <text class="card-source">
+      <view class="card-source-dot {{formatted.sourceClass}}"></view>
+      {{formatted.sourceLabel}}
+    </text>
+    <text class="card-time">{{formatted.time}}</text>
+  </view>
+</view>
+
+<!-- 长按操作菜单 -->
+<view class="action-overlay" wx:if="{{showActions}}" bindtap="onCloseActions">
+  <view class="action-sheet" catchtap="">
+    <view class="action-sheet-item" data-action="edit" bindtap="onAction">
+      <text class="action-sheet-icon">✏️</text>
+      <text>编辑</text>
+    </view>
+    <view class="action-sheet-item" data-action="copy" bindtap="onAction">
+      <text class="action-sheet-icon">📋</text>
+      <text>复制内容</text>
+    </view>
+    <view class="action-sheet-item danger" data-action="delete" bindtap="onAction">
+      <text class="action-sheet-icon">🗑</text>
+      <text>删除</text>
+    </view>
+    <view class="action-sheet-item" style="justify-content:center;color:#9090A8;margin-top:12rpx;" bindtap="onCloseActions">
+      <text>取消</text>
+    </view>
+  </view>
+</view>

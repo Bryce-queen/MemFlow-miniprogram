@@ -1,0 +1,147 @@
+/* ═══════════════════════════════
+   memory-card 组件 · Midnight Luxe
+   ═══════════════════════════════ */
+.memory-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.35s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.memory-card:active {
+  transform: scale(0.985);
+  opacity: 0.92;
+}
+
+/* ── 摘要 ── */
+.card-summary {
+  font-size: 29rpx;
+  color: #D0D0E0;
+  line-height: 1.7;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── 标签（带颜色） ── */
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5rpx 16rpx;
+  margin: 6rpx 10rpx 6rpx 0;
+  border-radius: 18rpx;
+  font-size: 21rpx;
+  font-weight: 500;
+  transition: all 0.12s ease;
+}
+
+.card-tag:active {
+  transform: scale(0.95);
+}
+
+/* ── 实体行 ── */
+.card-entity {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 12rpx;
+  margin: 6rpx 10rpx 6rpx 0;
+  font-size: 20rpx;
+  color: #707088;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10rpx;
+  border: 1rpx solid #1C1C30;
+}
+
+/* ── 底部信息 ── */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18rpx;
+}
+
+.card-source {
+  font-size: 22rpx;
+  color: #585870;
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.card-source-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+}
+
+.card-source-dot.text   { background: #4ADE80; box-shadow: 0 0 6rpx rgba(74,222,128,0.4); }
+.card-source-dot.voice { background: #D4A853; box-shadow: 0 0 6rpx rgba(212,168,83,0.4); }
+.card-source-dot.import{ background: #7B8CDE; box-shadow: 0 0 6rpx rgba(123,140,222,0.4); }
+
+.card-time {
+  font-size: 22rpx;
+  color: #585870;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 操作菜单遮罩 ── */
+.action-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.action-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #181830;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 32rpx 28rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+  z-index: 201;
+  animation: slideUp 0.25s ease-out;
+  border-top: 1rpx solid #222240;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.action-sheet-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 12rpx;
+  font-size: 30rpx;
+  color: #C0C0D0;
+  border-bottom: 1rpx solid #1C1C2E;
+}
+
+.action-sheet-item:last-child {
+  border-bottom: none;
+}
+
+.action-sheet-item:active {
+  background: rgba(255,255,255,0.03);
+  border-radius: 16rpx;
+}
+
+.action-sheet-item.danger {
+  color: #F87171;
+}
+
+.action-sheet-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  width: 44rpx;
+  text-align: center;
+}

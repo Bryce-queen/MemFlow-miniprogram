@@ -1,0 +1,156 @@
+/* ═══════════════════════════════
+   我的页 · Midnight Luxe
+   ═══════════════════════════════ */
+.page {
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* ── 页头 ── */
+.page-header {
+  padding: 44rpx 32rpx 8rpx;
+  padding-top: calc(44rpx + env(safe-area-inset-top));
+}
+
+.page-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  color: #EAEAF2;
+}
+
+/* ── 统计卡 ── */
+.stats-row {
+  display: flex;
+  padding: 24rpx 28rpx;
+  gap: 16rpx;
+}
+
+.stat-card {
+  flex: 1;
+  background: linear-gradient(160deg, #181830, #131328);
+  border-radius: 24rpx;
+  padding: 28rpx 20rpx;
+  text-align: center;
+  border: 1rpx solid #222240;
+}
+
+.stat-num {
+  display: block;
+  font-size: 52rpx;
+  font-weight: 800;
+  color: #D4A853;
+  margin-bottom: 6rpx;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #9090A8;
+  font-weight: 500;
+}
+
+/* ── 区块 ── */
+.section-card {
+  margin: 16rpx 28rpx;
+}
+
+.section-label {
+  font-size: 22rpx;
+  color: #585870;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  margin-bottom: 12rpx;
+  padding: 0 4rpx;
+}
+
+/* ── 状态条 ── */
+.status-row {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.status-text {
+  font-size: 24rpx;
+  margin-left: 10rpx;
+}
+
+.status-version {
+  font-size: 22rpx;
+  color: #585870;
+  margin-left: 12rpx;
+}
+
+/* ── 标签云 ── */
+.tag-cloud-card {
+  padding: 24rpx 28rpx;
+}
+
+.tag-cloud-inner {
+  padding-top: 4rpx;
+}
+
+/* ── 功能菜单 ── */
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 4rpx;
+  border-bottom: 1rpx solid #1C1C2E;
+  transition: all 0.15s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  opacity: 0.7;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.menu-label {
+  flex: 1;
+  font-size: 28rpx;
+  color: #C0C0D0;
+}
+
+.menu-arrow {
+  font-size: 24rpx;
+  color: #585870;
+}
+
+.menu-desc {
+  font-size: 22rpx;
+  color: #585870;
+  margin-top: 4rpx;
+}
+
+/* ── 配置输入 ── */
+.config-row {
+  margin-top: 8rpx;
+}
+
+.config-input {
+  background: #111122;
+  border-radius: 16rpx;
+  padding: 18rpx 24rpx;
+  color: #EAEAF2;
+  font-size: 26rpx;
+  border: 1rpx solid #222240;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.config-input::placeholder {
+  color: #4A4A60;
+}
+
+.config-btn {
+  margin-top: 16rpx;
+  width: 100%;
+}

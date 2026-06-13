@@ -1,0 +1,80 @@
+<!-- ═══════════════════════════════════════════
+   记忆外挂 · 发现页 · Midnight Luxe
+   ═══════════════════════════════════════════ -->
+<view class="page">
+  <!-- 页头 -->
+  <view class="page-header">
+    <text class="page-title">发现</text>
+  </view>
+
+  <!-- 统计 -->
+  <view class="stats-row" wx:if="{{stats}}">
+    <view class="stat-card fade-in-up">
+      <text class="stat-num">{{stats.total_memories}}</text>
+      <text class="stat-label">总记忆</text>
+    </view>
+    <view class="stat-card fade-in-up" style="animation-delay:0.05s">
+      <text class="stat-num">{{stats.total_tags}}</text>
+      <text class="stat-label">标签数</text>
+    </view>
+    <view class="stat-card fade-in-up" style="animation-delay:0.1s">
+      <text class="stat-num">{{stats.recent_count_7d}}</text>
+      <text class="stat-label">近 7 天</text>
+    </view>
+  </view>
+
+  <!-- AI 洞察 -->
+  <view class="insight-card" wx:if="{{insight}}">
+    <view class="insight-icon">💡</view>
+    <text class="insight-text">{{insight}}</text>
+    <text class="insight-badge">AI 洞察</text>
+  </view>
+
+  <!-- 热门标签 -->
+  <view class="section" wx:if="{{tags.length}}">
+    <view class="section-header flex-between">
+      <text class="section-title">热门标签</text>
+    </view>
+    <view class="tag-cloud">
+      <text
+        wx:for="{{tags}}"
+        wx:key="name"
+        class="cloud-tag"
+        style="font-size:{{item.count>5?'30':item.count>2?'26':'22'}}rpx;"
+        data-tag="{{item.name}}"
+        bindtap="onTagTap"
+      >{{item.name}}<text class="tag-count">{{item.count}}</text></text>
+    </view>
+  </view>
+
+  <!-- 最近记忆 -->
+  <view class="section" wx:if="{{recentMemories.length}}">
+    <view class="section-header flex-between">
+      <text class="section-title">最近记录</text>
+      <text class="section-more">{{recentMemories.length}} 条</text>
+    </view>
+    <memory-card
+      wx:for="{{recentMemories}}"
+      wx:key="id"
+      memory="{{item}}"
+      show-actions="{{false}}"
+      bind:tap="onMemoryTap"
+    />
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading&&!stats}}">
+    <text class="emoji">✨</text>
+    <text class="title">这里将会很有趣</text>
+    <text class="desc">记录一些记忆后\n这里会出现统计和洞察</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-dots">
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+      <view class="loading-dot"></view>
+    </view>
+    <text class="text-secondary">探索中…</text>
+  </view>
+</view>

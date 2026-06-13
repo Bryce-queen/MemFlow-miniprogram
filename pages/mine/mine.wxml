@@ -1,0 +1,81 @@
+<!-- ═══════════════════════════════════════════
+   记忆外挂 · 我的页 · Midnight Luxe
+   ═══════════════════════════════════════════ -->
+<view class="page">
+  <!-- 页头 -->
+  <view class="page-header">
+    <text class="page-title">我的</text>
+  </view>
+
+  <!-- 统计 -->
+  <view class="stats-row" wx:if="{{stats}}">
+    <view class="stat-card fade-in-up">
+      <text class="stat-num">{{stats.total_memories}}</text>
+      <text class="stat-label">总记忆</text>
+    </view>
+    <view class="stat-card fade-in-up" style="animation-delay:0.05s">
+      <text class="stat-num">{{stats.total_tags}}</text>
+      <text class="stat-label">标签数</text>
+    </view>
+    <view class="stat-card fade-in-up" style="animation-delay:0.1s">
+      <text class="stat-num">{{stats.recent_count_7d}}</text>
+      <text class="stat-label">近 7 天</text>
+    </view>
+  </view>
+
+  <!-- 服务状态 -->
+  <view class="card section-card">
+    <text class="section-label">服务状态</text>
+    <view class="status-row">
+      <view class="dot {{apiHealth?'dot-green':'dot-red'}}"></view>
+      <text class="status-text">{{apiHealth ? '已连接' : '未连接'}}</text>
+      <text class="status-version" wx:if="{{apiHealth&&apiHealth.version}}">v{{apiHealth.version}}</text>
+    </view>
+  </view>
+
+  <!-- 全部标签 -->
+  <view class="card section-card" wx:if="{{tags.length}}">
+    <text class="section-label">全部标签</text>
+    <view class="tag-cloud-inner flex-wrap">
+      <text
+        wx:for="{{tags}}"
+        wx:key="name"
+        class="tag"
+        data-tag="{{item.name}}"
+        bindtap="onTagTap"
+      >{{item.name}} · {{item.count}}</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="card section-card">
+    <text class="section-label">数据管理</text>
+    <view class="menu-item" bindtap="onSyncOffline">
+      <text class="menu-icon">🔄</text>
+      <view class="flex-1">
+        <text class="menu-label">离线同步</text>
+        <text class="menu-desc">同步本地缓存的记忆</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="onExport">
+      <text class="menu-icon">📤</text>
+      <view class="flex-1">
+        <text class="menu-label">导出记忆</text>
+        <text class="menu-desc">导出全部记忆为 JSON</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- API 配置 -->
+  <view class="card section-card">
+    <text class="section-label">API 服务器</text>
+    <view class="config-row">
+      <input class="config-input" value="{{apiBase}}" placeholder="http://localhost:8701" bindinput="onApiInput" />
+    </view>
+    <button class="btn-primary config-btn" bindtap="onSaveApi">保存配置</button>
+  </view>
+
+  <view style="height:60rpx;"></view>
+</view>

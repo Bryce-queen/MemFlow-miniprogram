@@ -1,0 +1,194 @@
+/* ═══════════════════════════════
+   搜索页 · Midnight Luxe
+   ═══════════════════════════════ */
+.page {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* ── 页头 ── */
+.page-header {
+  padding: 44rpx 32rpx 4rpx;
+  padding-top: calc(44rpx + env(safe-area-inset-top));
+}
+
+.page-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  color: #EAEAF2;
+}
+
+/* ── 搜索栏 ── */
+.search-wrapper {
+  position: relative;
+  margin: 16rpx 28rpx;
+}
+
+.search-bar-enhanced {
+  display: flex;
+  align-items: center;
+  background: #111122;
+  border-radius: 48rpx;
+  padding: 18rpx 28rpx;
+  border: 1rpx solid #222240;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.2);
+  transition: border-color 0.2s;
+}
+
+.search-bar-enhanced.focused {
+  border-color: rgba(212,168,83,0.35);
+  box-shadow: 0 4rpx 24rpx rgba(212,168,83,0.08);
+}
+
+.search-bar-enhanced input {
+  flex: 1;
+  background: transparent;
+  color: #EAEAF2;
+  font-size: 30rpx;
+  padding: 6rpx 0;
+}
+
+.search-icon {
+  font-size: 34rpx;
+  margin-right: 14rpx;
+  opacity: 0.35;
+}
+
+.search-clear {
+  font-size: 36rpx;
+  color: #585870;
+  padding: 8rpx;
+  margin-left: 12rpx;
+}
+
+/* ── 模式切换 ── */
+.mode-tabs {
+  display: flex;
+  padding: 8rpx 28rpx 20rpx;
+  gap: 12rpx;
+}
+
+.mode-chip {
+  padding: 10rpx 28rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #585870;
+  background: rgba(255,255,255,0.02);
+  border: 1rpx solid #222240;
+  transition: all 0.15s ease;
+}
+
+.mode-chip.active {
+  color: #D4A853;
+  background: rgba(212,168,83,0.08);
+  border-color: rgba(212,168,83,0.25);
+}
+
+/* ── 搜索历史 ── */
+.history-section {
+  margin: 12rpx 28rpx;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 4rpx;
+}
+
+.history-label {
+  font-size: 24rpx;
+  color: #585870;
+  font-weight: 600;
+}
+
+.history-clear {
+  font-size: 24rpx;
+  color: #9090A8;
+  padding: 8rpx;
+}
+
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4rpx 0;
+}
+
+.history-chip {
+  padding: 10rpx 22rpx;
+  margin: 6rpx 10rpx 6rpx 0;
+  background: rgba(255,255,255,0.03);
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  color: #9090A8;
+  border: 1rpx solid #222240;
+  transition: all 0.15s ease;
+}
+
+.history-chip:active {
+  background: rgba(212,168,83,0.08);
+  border-color: rgba(212,168,83,0.2);
+  color: #D4A853;
+}
+
+/* ── 结果区 ── */
+.results-header {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 32rpx 20rpx;
+}
+
+.results-count {
+  font-size: 24rpx;
+  color: #9090A8;
+}
+
+.results-keyword {
+  color: #EAEAF2;
+  font-weight: 600;
+}
+
+.match-row {
+  display: flex;
+  align-items: center;
+  padding: 6rpx 32rpx 16rpx;
+  gap: 12rpx;
+}
+
+.match-reason {
+  font-size: 22rpx;
+  color: #585870;
+  flex: 1;
+}
+
+.match-score {
+  font-size: 22rpx;
+  color: #9090A8;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.match-score.high {
+  color: #D4A853;
+}
+
+/* ── 高亮标记 ── */
+.highlight {
+  color: #D4A853;
+  font-weight: 600;
+}
+
+/* ── 热搜标签 ── */
+.hot-tags-section {
+  margin: 20rpx 28rpx;
+}
+
+.hot-tags-label {
+  font-size: 24rpx;
+  color: #585870;
+  margin-bottom: 12rpx;
+  padding: 0 4rpx;
+  font-weight: 600;
+}

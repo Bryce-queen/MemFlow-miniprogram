@@ -1,0 +1,155 @@
+/* ═══════════════════════════════
+   发现页 · Midnight Luxe
+   ═══════════════════════════════ */
+.page {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* ── 页头 ── */
+.page-header {
+  padding: 44rpx 32rpx 8rpx;
+  padding-top: calc(44rpx + env(safe-area-inset-top));
+}
+
+.page-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  color: #EAEAF2;
+}
+
+/* ── 统计卡片行 ── */
+.stats-row {
+  display: flex;
+  padding: 24rpx 28rpx;
+  gap: 16rpx;
+}
+
+.stat-card {
+  flex: 1;
+  background: linear-gradient(160deg, #181830, #131328);
+  border-radius: 24rpx;
+  padding: 28rpx 20rpx;
+  text-align: center;
+  border: 1rpx solid #222240;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120rpx;
+  height: 120rpx;
+  background: radial-gradient(circle, rgba(212,168,83,0.06) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.stat-num {
+  display: block;
+  font-size: 52rpx;
+  font-weight: 800;
+  color: #D4A853;
+  margin-bottom: 6rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #9090A8;
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
+/* ── 区块 ── */
+.section {
+  margin-top: 20rpx;
+}
+
+.section-header {
+  padding: 20rpx 32rpx 12rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #9090A8;
+  letter-spacing: 1rpx;
+}
+
+.section-more {
+  font-size: 24rpx;
+  color: #585870;
+}
+
+/* ── 标签云 ── */
+.tag-cloud {
+  padding: 8rpx 28rpx 16rpx;
+}
+
+.cloud-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 22rpx;
+  margin: 8rpx 12rpx 8rpx 0;
+  background: rgba(212,168,83,0.06);
+  border: 1rpx solid rgba(212,168,83,0.1);
+  border-radius: 24rpx;
+  color: #D4A853;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.cloud-tag:active {
+  background: rgba(212,168,83,0.15);
+  transform: scale(0.96);
+}
+
+.tag-count {
+  font-size: 20rpx;
+  opacity: 0.6;
+  margin-left: 4rpx;
+}
+
+/* ── 洞察卡片 ── */
+.insight-card {
+  background: linear-gradient(160deg, rgba(212,168,83,0.08), rgba(212,168,83,0.02));
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin: 16rpx 28rpx;
+  border: 1rpx solid rgba(212,168,83,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-icon {
+  font-size: 40rpx;
+  margin-bottom: 12rpx;
+}
+
+.insight-text {
+  font-size: 28rpx;
+  color: #EAEAF2;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.insight-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6rpx 16rpx;
+  background: rgba(212,168,83,0.15);
+  border-radius: 16rpx;
+  font-size: 20rpx;
+  color: #D4A853;
+  font-weight: 700;
+  margin-top: 16rpx;
+  letter-spacing: 1rpx;
+}

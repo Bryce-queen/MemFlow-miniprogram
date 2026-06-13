@@ -1,0 +1,104 @@
+<!-- ═══════════════════════════════════════════
+   记忆外挂 · 详情页 · Midnight Luxe
+   ═══════════════════════════════════════════ -->
+<view class="page" wx:if="{{!loading&&memory}}">
+  <!-- 页头 -->
+  <view class="detail-header">
+    <view class="back-btn" bindtap="onBack">←</view>
+    <text class="detail-title">{{memory.summary || '记忆详情'}}</text>
+  </view>
+
+  <scroll-view scroll-y>
+
+    <!-- AI 摘要 -->
+    <view class="summary-card" wx:if="{{memory.summary}}">
+      <text class="summary-text">{{memory.summary}}</text>
+    </view>
+
+    <view class="summary-card" wx:elif="{{!enriching}}" style="border-left-color:#585870;">
+      <text class="summary-text" style="color:#9090A8;font-size:26rpx;">暂无 AI 摘要</text>
+      <button class="btn-ghost" style="margin-top:20rpx;font-size:24rpx;padding:10rpx 24rpx;" bindtap="onEnrich" disabled="{{enriching}}">
+        <text class="enrich-btn">
+          <text wx:if="{{enriching}}" class="enrich-spinner"></text>
+          {{enriching ? '分析中…' : '✨ AI 分析'}}
+        </text>
+      </button>
+    </view>
+
+    <!-- 编辑/查看 -->
+    <view class="card" wx:if="{{editing}}">
+      <textarea class="edit-content-area" value="{{editContent}}" placeholder="编辑内容…" bindinput="onContentInput" maxlength="5000" auto-height />
+      <text class="text-secondary" style="font-size:22rpx;display:block;margin-top:16rpx;">标签（逗号分隔）</text>
+      <input class="edit-tags-input" value="{{editTags}}" placeholder="标签1, 标签2" bindinput="onTagsInput" />
+    </view>
+
+    <view class="content-card card" wx:else>
+      <text class="content-text">{{memory.content}}</text>
+
+      <!-- 标签 -->
+      <view class="flex-wrap mt-20" wx:if="{{memory.tags.length}}">
+        <text wx:for="{{memory.tags}}" wx:key="*this" class="tag">{{item}}</text>
+      </view>
+
+      <!-- 实体 -->
+      <view class="entity-row" wx:if="{{memory.entities.length}}">
+        <text wx:for="{{memory.entities}}" wx:key="name" class="entity-chip">{{item.icon||'📌'}} {{item.name}}</text>
+      </view>
+    </view>
+
+    <!-- 元信息 -->
+    <view class="meta-card">
+      <view class="meta-row">
+        <text class="meta-label">来源</text>
+        <text class="meta-value">{{memory.source}}</text>
+      </view>
+      <view class="meta-row" wx:if="{{memory.source_url}}">
+        <text class="meta-label">链接</text>
+        <text class="meta-value">{{memory.source_url}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-label">创建时间</text>
+        <text class="meta-value">{{memory.created_at}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-label">更新时间</text>
+        <text class="meta-value">{{memory.updated_at}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-label">ID</text>
+        <text class="meta-value-sm">{{memory.id}}</text>
+      </view>
+    </view>
+
+    <!-- 关联记忆 -->
+    <view class="related-section" wx:if="{{related.length}}">
+      <view class="related-header">关联记忆 · {{related.length}}</view>
+      <memory-card
+        wx:for="{{related}}"
+        wx:key="id"
+        memory="{{item}}"
+        show-actions="{{false}}"
+        bind:tap="onRelatedTap"
+      />
+    </view>
+
+    <view style="height:140rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar">
+    <button class="btn btn-ghost" bindtap="onCopy">📋 复制</button>
+    <button class="btn btn-primary" bindtap="{{editing?'onSave':'onToggleEdit'}}">
+      {{editing ? '💾 保存' : '✏️ 编辑'}}
+    </button>
+    <button class="btn btn-danger" bindtap="onDelete">🗑 删除</button>
+  </view>
+</view>
+
+<view class="loading" wx:if="{{loading}}">
+  <view class="loading-dots">
+    <view class="loading-dot"></view>
+    <view class="loading-dot"></view>
+    <view class="loading-dot"></view>
+  </view>
+</view>
