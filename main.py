@@ -310,8 +310,16 @@ def get_related_memories(mem_id: str):
 # ── 批量向量化 ──
 
 @app.post("/admin/reindex-embeddings", status_code=200)
-def reindex_embeddings():
+def reindex_embeddings(request: Request):
     """为所有缺少 embedding 的记忆生成向量（管理接口）"""
+    # 管理端点需独立 Admin Key 认证
+    cfg = get_config()
+    admin_key = cfg.admin_key or cfg.api_key  # 回退到通用 API Key
+    if admin_key:
+        client_key = request.headers.get("X-Admin-Key", "")
+        if client_key != admin_key:
+            raise HTTPException(status_code=403, detail="需要有效的 X-Admin-Key")
+
     if not embedder.is_available():
         raise HTTPException(status_code=400, detail="Embedding 服务不可用")
 

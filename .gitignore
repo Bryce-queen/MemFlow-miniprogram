@@ -19,3 +19,7 @@ Thumbs.db
 
 # Project
 project.private.config.json
+
+# SQLite WAL (runtime temp files)
+data/*.db-shm
+data/*.db-wal

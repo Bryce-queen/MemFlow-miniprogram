@@ -53,6 +53,7 @@ class Config:
 
     # ── API 安全 ──
     api_key: str = os.getenv("MEMORY_API_KEY", "")  # 为空时不启用认证（仅本地开发）
+    admin_key: str = os.getenv("MEMORY_ADMIN_KEY", "")  # 管理端点独立密钥，为空回退到 api_key
 
     # ── 微信小程序 ──
     wx_appid: str = os.getenv("WX_APPID", "")
