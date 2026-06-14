@@ -45,8 +45,14 @@ class Config:
         if not (0.0 <= self.hybrid_alpha <= 1.0):
             self.hybrid_alpha = 0.5
 
+    # ── 限流 ──
+    rate_limit_per_min: int = int(os.getenv("MEMORY_RATE_LIMIT", "60"))  # 每 IP 每分钟最大请求数
+
     # ── 搜索 ──
     hybrid_alpha: float = float(os.getenv("MEMORY_HYBRID_ALPHA", "0.5"))  # 0=纯语义, 1=纯关键词
+
+    # ── API 安全 ──
+    api_key: str = os.getenv("MEMORY_API_KEY", "")  # 为空时不启用认证（仅本地开发）
 
     # ── 微信小程序 ──
     wx_appid: str = os.getenv("WX_APPID", "")

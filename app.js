@@ -2,6 +2,7 @@
 App({
   globalData: {
     apiBase: 'http://localhost:8701',  // 开发环境，上线改 HTTPS
+    apiKey: '',  // 与后端 MEMORY_API_KEY 一致，为空则后端不启认证
     userInfo: null,
   },
 

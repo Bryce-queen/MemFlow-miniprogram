@@ -3,11 +3,15 @@
 启动: uvicorn main:app --reload --port 8701
 """
 import logging
+import time
+from collections import defaultdict
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
+from config import get_config
 from models import MemoryCreate, MemoryResponse, MemoryUpdate, SearchResult, StatsResponse
 from store import MemoryStore
 from ai_processor import AIProcessor
@@ -45,6 +49,74 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+
+# ── 认证中间件 ──
+
+_UNPROTECTED_PATHS = {"/health", "/docs", "/openapi.json", "/redoc"}
+
+
+class APIKeyMiddleware(BaseHTTPMiddleware):
+    """API Key 认证中间件 — 密钥为空时自动放行（本地开发模式）"""
+
+    async def dispatch(self, request: Request, call_next):
+        cfg = get_config()
+        # 未配置密钥 = 本地开发模式，跳过认证
+        if not cfg.api_key:
+            return await call_next(request)
+        # 健康检查 / 文档页免认证
+        if request.url.path in _UNPROTECTED_PATHS:
+            return await call_next(request)
+        # 校验 X-API-Key 头
+        client_key = request.headers.get("X-API-Key", "")
+        if client_key != cfg.api_key:
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "无效或缺失 API Key"},
+            )
+        return await call_next(request)
+
+
+# ── 限流中间件 ──
+
+class RateLimitMiddleware(BaseHTTPMiddleware):
+    """简单令牌桶限流 — 每 IP 每分钟 N 次"""
+
+    def __init__(self, app, max_per_min: int = 60):
+        super().__init__(app)
+        self.max_per_min = max_per_min
+        self._windows: dict[str, list[float]] = defaultdict(list)
+
+    async def dispatch(self, request: Request, call_next):
+        if request.url.path in _UNPROTECTED_PATHS:
+            return await call_next(request)
+
+        ip = request.client.host if request.client else "unknown"
+        now = time.time()
+        window = now - 60  # 滑动窗口 60s
+
+        # 清理过期记录
+        self._windows[ip] = [t for t in self._windows[ip] if t > window]
+
+        if len(self._windows[ip]) >= self.max_per_min:
+            logger.warning(f"⛔ 限流触发: {ip} ({len(self._windows[ip])} req/min)")
+            return JSONResponse(
+                status_code=429,
+                content={"detail": "请求过于频繁，请稍后重试"},
+            )
+
+        self._windows[ip].append(now)
+        return await call_next(request)
+
+
+from starlette.responses import JSONResponse
+
+app.add_middleware(
+    APIKeyMiddleware,
+)
+app.add_middleware(
+    RateLimitMiddleware,
+    max_per_min=get_config().rate_limit_per_min,
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

@@ -3,11 +3,16 @@ const app = getApp()
 
 const request = (url, method = 'GET', data = null) => {
   return new Promise((resolve, reject) => {
+    var headers = { 'Content-Type': 'application/json' }
+    var apiKey = app.globalData.apiKey
+    if (apiKey) {
+      headers['X-API-Key'] = apiKey
+    }
     wx.request({
       url: app.globalData.apiBase + url,
       method,
       data,
-      header: { 'Content-Type': 'application/json' },
+      header: headers,
       success(res) {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
